@@ -1,0 +1,48 @@
+name: IPES Pipeline CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        # Install Playwright browsers (required for download_pdfs_robust.py import, even if not running)
+        playwright install chromium
+
+    - name: Security Check (Safety)
+      run: |
+        pip install safety
+        safety check
+
+    - name: Lint with Flake8
+      run: |
+        pip install flake8
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+    - name: Verify Data Structure Logic (Integration Test)
+      # We skip fetch/download (requires API keys/Time) but verify logic
+      # We mock the input file for the test
+      run: |
+        # Create a dummy input file for testing structure logic
+        mkdir -p data/raw
+        echo '[{"id_submission": "1", "filings": [{"docket_number": "INBOX-52.15", "company_name": "Test Company Inc."}]}]' > data/raw/ipes_filings.json
+        
+        # Run Structure Step (Testing Deduplication & Schema Validation)
+        python3 code/structure_data.py

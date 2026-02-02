@@ -1,0 +1,31 @@
+# Environment & Secrets
+.env
+.env.*
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+*.egg-info/
+
+# Data (user-specific, regeneratable)
+data/
+documents/
+enrichment_cache.json
+
+# Scheduler configs (contain user schedules)
+dashboard/config/*.json
+scheduler_config.json
+scheduler_jobs.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
