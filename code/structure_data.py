@@ -23,13 +23,24 @@ from collections import defaultdict
 from typing import Any, Dict, List, Tuple
 from pathlib import Path
 
-# Add local directory to path for import if needed, or relative import
+# Add local directory to path to ensure we can import 'schemas'
+# irrespective of how the script is invoked (module vs script)
 import sys
+from pathlib import Path
+current_dir = str(Path(__file__).parent.absolute())
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
 try:
     from schemas import Company
 except ImportError:
-    # If running from root as module
-    from code.schemas import Company
+    # If standard import fails, try import from current dir explicitly
+    # (This handles edge cases in some environments)
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("schemas", f"{current_dir}/schemas.py")
+    schemas = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(schemas)
+    Company = schemas.Company
 
 
 INPUT_FILE = "data/raw/ipes_filings.json"
@@ -252,8 +263,7 @@ def structure_data(filings: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
             try:
                 # INTEGRITY CHECK: Validate with Pydantic
                 validated_company = Company(**company_record)
-                # Convert back to dict for JSON serialization (or keep as object if we updated the rest of the code)
-                # For now, converting back to dict to maintain compatibility with existing return type
+                # Convert back to dict for JSON serialization
                 structured_companies.append(validated_company.model_dump())
             except Exception as e:
                 print(f"[warning] Validation failed for {normalized_name}: {e}")
@@ -274,7 +284,7 @@ def structure_data(filings: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         "total_processed": len(structured_companies) + validation_errors, # approximate totals
         "valid_records": len(structured_companies),
         "invalid_records": validation_errors,
-        "error_samples": error_log[:5] # keep it brief
+        "error_samples": error_log[:5] 
     }
     
     # Append to history
