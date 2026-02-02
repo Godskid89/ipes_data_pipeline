@@ -40,9 +40,45 @@ jobs:
       # We skip fetch/download (requires API keys/Time) but verify logic
       # We mock the input file for the test
       run: |
-        # Create a dummy input file for testing structure logic
-        mkdir -p data/raw
-        echo '[{"id_submission": "1", "filings": [{"docket_number": "INBOX-52.15", "company_name": "Test Company Inc."}]}]' > data/raw/ipes_filings.json
+        # Create a dummy input file matching actual FCC API schema
+        mkdir -p data/raw data/structured data/enriched data/monitoring
+        cat > data/raw/ipes_filings.json << 'EOF'
+        [
+          {
+            "submission_id": "1234567890",
+            "company_name": "Test Telecom LLC",
+            "date_received": "2024-01-15",
+            "submission_type": "APPLICATION",
+            "docket_number": "INBOX-52.15",
+            "proceeding_description": "VoIP Numbering Authorization Application (Fee Required)",
+            "bureau": "Wireline Competition Bureau",
+            "filing_status": "DISSEMINATED",
+            "contact_attorney": "",
+            "law_firm": "",
+            "document_urls": "",
+            "detail_url": "https://www.fcc.gov/ecfs/filing/1234567890"
+          },
+          {
+            "submission_id": "9876543210",
+            "company_name": "Test Communications Inc.",
+            "date_received": "2024-02-20",
+            "submission_type": "APPLICATION",
+            "docket_number": "25-100",
+            "proceeding_description": "Interconnected VoIP Numbering Authorization Application Filed By Test Communications Inc. Pursuant To Section 52.15(g)(3)",
+            "bureau": "Wireline Competition Bureau",
+            "filing_status": "DISSEMINATED",
+            "contact_attorney": "",
+            "law_firm": "",
+            "document_urls": "",
+            "detail_url": "https://www.fcc.gov/ecfs/filing/9876543210"
+          }
+        ]
+        EOF
         
         # Run Structure Step (Testing Deduplication & Schema Validation)
         python3 code/structure_data.py
+        
+        # Verify outputs were created
+        test -f data/structured/companies.csv && echo "✓ companies.csv created"
+        test -f data/structured/filings.csv && echo "✓ filings.csv created"
+
