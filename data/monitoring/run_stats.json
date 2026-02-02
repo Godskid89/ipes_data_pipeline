@@ -1,0 +1,116 @@
+[
+  {
+    "status": "success",
+    "timestamp": "2026-02-02T12:27:29Z",
+    "total_duration_seconds": 1.11,
+    "validation_report": {
+      "timestamp": "2026-02-02T04:27:29.365527",
+      "total_processed": 178,
+      "valid_records": 178,
+      "invalid_records": 0,
+      "error_samples": []
+    },
+    "steps": {},
+    "outputs": {
+      "raw_filings": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/raw/ipes_filings.json",
+      "structured_companies": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/structured/companies.csv",
+      "enriched_data": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/enriched/companies_enriched.json",
+      "documents_folder": "/Users/josepholadokun/Desktop/sent_growth_engineer/documents"
+    }
+  },
+  {
+    "status": "success",
+    "timestamp": "2026-02-02T13:08:25Z",
+    "total_duration_seconds": 0.87,
+    "validation_report": {
+      "timestamp": "2026-02-02T05:08:25.647644",
+      "total_processed": 178,
+      "valid_records": 178,
+      "invalid_records": 0,
+      "error_samples": []
+    },
+    "steps": {},
+    "outputs": {
+      "raw_filings": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/raw/ipes_filings.json",
+      "structured_companies": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/structured/companies.csv",
+      "enriched_data": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/enriched/companies_enriched.json",
+      "documents_folder": "/Users/josepholadokun/Desktop/sent_growth_engineer/documents"
+    }
+  },
+  {
+    "status": "success",
+    "timestamp": "2026-02-02T13:12:08Z",
+    "total_duration_seconds": 0.86,
+    "validation_report": {
+      "timestamp": "2026-02-02T05:12:07.960599",
+      "total_processed": 178,
+      "valid_records": 178,
+      "invalid_records": 0,
+      "error_samples": []
+    },
+    "steps": {},
+    "outputs": {
+      "raw_filings": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/raw/ipes_filings.json",
+      "structured_companies": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/structured/companies.csv",
+      "enriched_data": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/enriched/companies_enriched.json",
+      "documents_folder": "/Users/josepholadokun/Desktop/sent_growth_engineer/documents"
+    }
+  },
+  {
+    "status": "success",
+    "timestamp": "2026-02-02T13:20:23Z",
+    "total_duration_seconds": 0.85,
+    "validation_report": {
+      "timestamp": "2026-02-02T05:20:22.907891",
+      "total_processed": 178,
+      "valid_records": 178,
+      "invalid_records": 0,
+      "error_samples": []
+    },
+    "steps": {},
+    "outputs": {
+      "raw_filings": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/raw/ipes_filings.json",
+      "structured_companies": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/structured/companies.csv",
+      "enriched_data": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/enriched/companies_enriched.json",
+      "documents_folder": "/Users/josepholadokun/Desktop/sent_growth_engineer/documents"
+    }
+  },
+  {
+    "status": "success",
+    "timestamp": "2026-02-02T13:31:54Z",
+    "total_duration_seconds": 0.9,
+    "validation_report": {
+      "timestamp": "2026-02-02T05:31:54.245994",
+      "total_processed": 178,
+      "valid_records": 178,
+      "invalid_records": 0,
+      "error_samples": []
+    },
+    "steps": {},
+    "outputs": {
+      "raw_filings": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/raw/ipes_filings.json",
+      "structured_companies": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/structured/companies.csv",
+      "enriched_data": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/enriched/companies_enriched.json",
+      "documents_folder": "/Users/josepholadokun/Desktop/sent_growth_engineer/documents"
+    }
+  },
+  {
+    "status": "success",
+    "timestamp": "2026-02-02T14:51:12Z",
+    "total_duration_seconds": 1502.25,
+    "validation_report": {
+      "timestamp": "2026-02-02T06:26:38.289498",
+      "total_processed": 178,
+      "valid_records": 178,
+      "invalid_records": 0,
+      "error_samples": []
+    },
+    "steps": {},
+    "outputs": {
+      "raw_filings": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/raw/ipes_filings.json",
+      "structured_companies": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/structured/companies.csv",
+      "enriched_data": "/Users/josepholadokun/Desktop/sent_growth_engineer/data/enriched/companies_enriched.json",
+      "documents_folder": "/Users/josepholadokun/Desktop/sent_growth_engineer/documents"
+    }
+  }
+]
