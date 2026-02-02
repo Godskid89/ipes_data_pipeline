@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Master Pipeline Script for Sent Growth Engineer Assessment.
+Master Pipeline Script for the Pipeline.
 
 This script orchestrates the entire data pipeline:
 1. FETCH: Extracts fresh filings from FCC ECFS API -> data/raw/ipes_filings.json
@@ -57,31 +57,31 @@ def main():
 
     # 1. FETCH DATA
     if not args.skip_fetch:
-        # fetch.py outputs based on --out-prefix. We want it in data/raw/ipes_filings
+        # fetch.py outputs based on --out-prefix.
         out_prefix = DATA_RAW / "ipes_filings"
         # Fetch ALL records (max-records 0 = everything)
-        cmd = f"python3 code/fetch.py --limit 100 --max-records 0 --out-prefix '{out_prefix}'"
+        cmd = f"{sys.executable} code/fetch.py --limit 100 --max-records 0 --out-prefix '{out_prefix}'"
         run_step("Fetch ALL Data from FCC", cmd)
     else:
         print("\n[SKIP] Step 'Fetch Data' skipped")
 
     # 2. STRUCTURE DATA (Relational Schema)
     # structure_data.py reads data/raw/ipes_filings.json and outputs to data/structured/
-    cmd = "python3 code/structure_data.py"
+    cmd = f"{sys.executable} code/structure_data.py"
     run_step("Structure Data (Relational)", cmd)
 
     # 3. ENRICH DATA
     # enrich_data.py reads data/structured/companies_with_filings.json and outputs to data/enriched/
-    cmd = "python3 code/enrich_data.py"
+    cmd = f"{sys.executable} code/enrich_data.py"
     run_step("Enrich Data (OpenAI)", cmd)
 
     # 4. DOWNLOAD DOCUMENTS
     if not args.skip_download:
         if args.doc_limit > 0:
-            cmd = f"python3 code/download_pdfs_robust.py --limit {args.doc_limit}"
+            cmd = f"{sys.executable} code/download_pdfs_robust.py --limit {args.doc_limit}"
             step_name = f"Download PDFs (Limit: {args.doc_limit})"
         else:
-            cmd = "python3 code/download_pdfs_robust.py --all"
+            cmd = f"{sys.executable} code/download_pdfs_robust.py --all"
             step_name = "Download PDFs (All)"
         
         run_step(step_name, cmd)
